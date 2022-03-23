@@ -36,16 +36,20 @@ const recuperarPelisPopulares=async()=>
         const body=await respuesta.json();
         const peliculas=body.results;
         peliculas.forEach((pelicula) => {
-            const card=`
-            <div ondblclick="irPelicula('${pelicula.id}')" class="card col-sm-3">
-                <img src="${urlPoster}${pelicula.backdrop_path}" class="card-img-top" alt="${pelicula.original_title}">
-                <div class="card-body">
-                    <h3>${pelicula.original_title}</h3>
-                    <p class="card-text">${pelicula.overview}</p>
+            if(pelicula.overview!==''&&pelicula.backdrop_path!==null)
+            {
+                const card=`
+                <div ondblclick="irPelicula('${pelicula.id}')" class="card col-3 p-0 m-1">
+                    <img src="${urlPoster}${pelicula.backdrop_path}" class="card-img-top" alt="${pelicula.original_title}">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <h3>${pelicula.original_title}</h3>
+                        <span class="badge bg-success me-1">Calificación: ${pelicula.vote_average}</span>     
+                    </div>
                 </div>
-            </div>
-            `
-            containerCards.insertAdjacentHTML('beforeend',card);
+                `
+                //<p class="card-text">${pelicula.overview}</p>
+                containerCards.insertAdjacentHTML('beforeend',card);
+            }
         });
         
     } catch (error) {
