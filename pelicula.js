@@ -1,3 +1,6 @@
+// var myCarousel = document.querySelector('#myCarousel')
+// var carousel = new bootstrap.Carousel(myCarousel)
+
 const containerGenerosPeli=document.querySelector('#generosPeli');
 const containerProductoresPeli=document.querySelector('#productoresPeli');
 const containerReparto=document.querySelector('#contenedorReparto');
