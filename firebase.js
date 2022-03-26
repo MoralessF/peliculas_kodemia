@@ -1,10 +1,10 @@
 //const firebaseConfig = "peliculas-app-31b24";
 const urlDB = "https://peliculas-app-31b24-default-rtdb.firebaseio.com/"
 
-const crearPeliculaFavorita = (peliculaID, backdropPath, title, overview, funcion) =>
+const crearPeliculaFavorita = (peliculaID, backdropPath, title, overview, vote_average, funcion) =>
 {
     const url=`${urlDB}/favoritos.json`;
-    const pelicula = {peliculaID, backdropPath, title, overview};
+    const pelicula = {peliculaID, backdropPath, title, vote_average, overview};
 
     fetch(url,{
         method:'POST',
@@ -32,5 +32,11 @@ const recuperarFavoritos2=async()=>
     const url=`${urlDB}/favoritos.json`;
     const respuesta=await fetch(url);
     const body=await respuesta.json();
+    const peliculas=body.results;
+    console.log(body);
+    // peliculas.forEach((pelicula)=>
+    // {
+    //     console.log(pelicula);
+    // });
     return body;
 }

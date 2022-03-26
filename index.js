@@ -19,7 +19,7 @@ const recuperarPelisPopulares=async()=>
         const body=await respuesta.json();
         peliculas=body.results;
         peliculas.forEach((pelicula) => {
-            console.log(pelicula);
+            //console.log(pelicula);
             if(pelicula.overview!==''&&pelicula.backdrop_path!==null)
             {
                 // console.log(typeof pelicula.vote_average);
@@ -70,23 +70,29 @@ const irPelicula = (peliculaID) =>
 const marcarFavorito = (id) =>
 {
     const pelicula = peliculas.find((pelicula)=>pelicula.id==id);
-    console.log(pelicula);
-    crearPeliculaFavorita(
-        pelicula.id,
-        pelicula.backdrop_path,
-        pelicula.original_title,
-        pelicula.overview,
-        (body) => {
-            const icono=document.getElementById(pelicula.id);
-            icono.classList.remove('bi-heart');
-            icono.classList.add('bi-heart-fill');
-        }
-    );
-    // const cambiarClase=Array.from(e.target.classList).find((clase)=>
-    // {
-    //     clase=='bi-heart'
-    // });
-    // console.log();
+    const icono=document.getElementById(pelicula.id);
+    //console.log(Array.from(icono.classList));
+    const corazon=Array.from(icono.classList).find((clase)=>clase=='bi-heart-fill');
+    if(!corazon)
+    {
+        //console.log('No es favorito');
+        crearPeliculaFavorita(
+            pelicula.id,
+            pelicula.backdrop_path,
+            pelicula.original_title,
+            pelicula.overview,
+            pelicula.vote_average,
+            (body) => {
+                const icono=document.getElementById(pelicula.id);
+                icono.classList.remove('bi-heart');
+                icono.classList.add('bi-heart-fill','text-danger');
+            }
+        );
+    }
+    else
+    {
+        alert('¿Quieres eliminar favorito?');
+    }
 }
 
 

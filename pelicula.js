@@ -51,14 +51,13 @@ const recuperarPelcula = async()=>
         url=`${prefixURL}/movie/${id}/credits?api_key=${apiKey2}&language=es-MX`;
         respuesta=await fetch(url);
         const reparto=await respuesta.json();
-        for(let i=0;i<3;i++)
+        for(let i=0;i<10;i++)
         {
-            let actor=reparto.cast[i]
-            console.log(actor.name);
+            let actor=reparto.cast[i];
             if(actor.profile_path!==null)
             {
                 const cardActor=`
-                <div class="card p-0 m-1" style="width: 15rem;">
+                <div class="card p-0 m-1 col-2">
                     <img src="${urlPoster2}${actor.profile_path}" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column align-items-center justify-content-center">
                       <p class="card-text">${actor.name}</p>
